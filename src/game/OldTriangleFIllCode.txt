@@ -1,0 +1,188 @@
+
+		g.setColor(c);
+		float x1 = Math.max(Math.min(t.p[0].x,800f),0f);
+		float y1 = Math.max(Math.min(t.p[0].y,600f),0f);
+		float x2 = Math.max(Math.min(t.p[1].x,800f),0f);
+		float y2 = Math.max(Math.min(t.p[1].y,600f),0f);
+		float x3 = Math.max(Math.min(t.p[2].x,800f),0f);
+		float y3 = Math.max(Math.min(t.p[2].y,600f),0f);
+		
+		
+		if (y2 < y1) {
+			//Util.swap(y1,y2);
+			//Util.swap(x1,x2);
+			
+			float temp = y1;
+			y1 = y2;
+			y2 = temp;
+			
+			float temp2 = x1;
+			x1 = x2;
+			x2 = temp2;
+		}
+		
+		if (y3 < y1) {
+			//Util.swap(y1,y3);
+			//Util.swap(x1,x3);
+			
+			float temp = y1;
+			y1 = y3;
+			y3 = temp;
+			
+			float temp2 = x1;
+			x1 = x3;
+			x3 = temp2;
+		}
+		
+		if (y3 < y2) {
+			//Util.swap(y2,y3);
+			//Util.swap(x2,x3);
+			
+			float temp = y2;
+			y2 = y3;
+			y3 = temp;
+			
+			float temp2 = x2;
+			x2 = x3;
+			x3 = temp2;
+		}
+		
+		g.setColor(new Color(0,0,0));
+		g.drawLine((int) x1,(int) y1,(int) x2,(int) y2);
+		g.setColor(new Color(255,0,0));
+		g.drawLine((int) x2,(int) y2,(int) x3,(int) y3);
+		g.setColor(new Color(0,255,0));
+		g.drawLine((int) x3,(int) y3,(int) x1,(int) y1);
+		
+		g.setColor(c);
+	
+		//if (y1 < y2) {
+			/*int dy = (int) (y1-y2);
+			int dy2 = (int) (y1-y3);
+			int dx = (int) (x1-x2);
+			int dx2 = (int) (x1-x3);
+			
+			if (Math.abs(dy) < 0.6f || Math.abs(dy2) < 0.6f) return;
+
+			float xs = x1, xe = x1;
+			
+			for (int i = (int) Math.max(y1,0); i < y2; i++) {
+				xs += ((float) dx/ (float) dy);
+				xe += ((float) dx2/ (float) dy2);
+				
+				if (xs < 0) xs = 0;
+				if (xe < 0) xe = 0;
+				if (xs > 800) xs = 800;
+				if (xe > 800) xe = 800;
+				
+				drawGradientLine((int) xs,i,(int) xe,i,new Color(255,0,0),new Color(255,255,0),g);
+				
+				/*if (xs < xe) {
+					for (int j = (int) xs; j < xe; j++) {
+						g.fillRect(j, i, 1,1);
+					}
+				} else {
+					for (int j = (int) xe; j < xs; j++) {
+						g.fillRect(j, i, 1,1);
+					}
+				}
+				
+				if (i > 600) {
+					break;
+				}
+			}
+			
+			xs = x2; 
+			//xe = x1+2;
+			
+			dy = (int) (y2-y3);
+			dx = (int) (x2-x3);
+			
+			if (Math.abs(dy) < 0.6f || Math.abs(dy2) < 0.6f) return;
+			
+			for (float i = y2; i < y3; i++) {
+				xs += ((float) dx / (float) dy);
+				xe += ((float) dx2 / (float) dy2);
+				
+				if (xs < 0) xs = 0;
+				if (xe < 0) xe = 0;
+				if (xs > 800) xs = 800;
+				if (xe > 800) xe = 800;
+				
+				drawGradientLine((int) xs,(int) i,(int) xe,(int) i,new Color(255,0,0),new Color(255,255,0),g);
+				
+				if (xs < xe) {
+					for (int j = (int) xs; j < xe; j++) {
+						g.fillRect(j, i, 1,1);
+					}
+				} else {
+					for (int j = (int) xe; j < xs; j++) {
+						g.fillRect(j, i, 1,1);
+					}
+				}
+				
+				if (i > 600) {
+					break;
+				}
+			}*/
+		//}
+			
+			g.setColor(new Color(0,0,0));
+			//g.drawLine((int) t.p[0].x,(int) t.p[0].y,(int) t.p[1].x,(int) t.p[1].y);
+			//g.drawLine((int) t.p[1].x,(int) t.p[1].y,(int) t.p[2].x,(int) t.p[2].y);
+			//g.drawLine((int) t.p[2].x,(int) t.p[2].y,(int) t.p[0].x,(int) t.p[0].y);
+		
+		/*int dy1 = (int) (y2 - y1);
+		int dx1 = (int) (x2 - x1);
+		
+		int dy2 = (int) (y3 - y1);
+		int dx2 = (int) (x3 - x1);
+		
+		float stepax = 0;
+		float stepbx = 0;
+		
+		if (dy1 != 0) stepax = dx1 / (float) Math.abs(dy1); 
+		if (dy2 != 0) stepbx = dx2 / (float) Math.abs(dy2); 
+		
+		if (dy1 != 0) {
+			for (int i = (int) y1; i <= y2; i++) {
+				int ax = (int) (x1 + (float) (i - y1) * stepax);
+				int bx = (int) (x1 + (float) (i - y1) * stepbx);
+				
+				if (ax > bx) {
+					Util.swap(ax, bx);
+				}
+				
+				float ts = 1.0f / ((float)(bx-ax));
+				float r = 0.0f;
+				
+				drawGradientLine(ax,i,bx,i,new Color(255,0,0),new Color(0,0,255),g);
+				
+				/*for (int j = ax; j < bx; j++) {
+					r += ts;
+					
+					//g.drawLine(j,i,j,i);
+					
+					
+				}
+			}
+		}
+		
+		dy1 = (int) (y3 - y2);
+		dx1 = (int) (x3 - x2);
+		
+		if (dy1 != 0) stepax = dx1 / (float) Math.abs(dy1);
+		if (dy2 != 0) stepbx = dx2 / (float) Math.abs(dy2);
+		
+		if (dy1 != 0) {
+			for (int i = (int) y2; i <= y3; i++) {
+				int ax = (int) (x2 + (float) (i - y2) * stepax);
+				int bx = (int) (x1 + (float) (i - y1) * stepbx);
+				
+				if (ax > bx) {
+					//Util.swap(ax, bx);
+				}
+				
+				drawGradientLine(ax,i,bx,i,new Color(255,0,0),new Color(0,0,255),g);
+			}
+		}*/
